@@ -1,17 +1,19 @@
 document.addEventListener("DOMContentLoaded", function(e) {
-  document.getElementById("get-weather").addEventListener("click", showWeather);
+  document.getElementById("get-weather").addEventListener("click", () => fetchWeather(document.getElementById("location").value));
 });
-
-function showWeather() {
-  const location = document.getElementById("location").value;
-  const result = fetchWeather(location);
-}
 
 async function fetchWeather(location) {
   try {
-    const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + location + "&APPID=" + APPID, {mode: 'cors'});
+    const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&APPID=" + APPID, {mode: 'cors'});
     const data = await response.json();
     console.log(data);
+    if(data.cod == "200") {
+      document.getElementById("result").innerHTML = data.main.temp + " &deg;C";
+    }
+    else {
+      this.error = "Woops, error!";
+      this.shown = false;
+    }
   }
   catch(e) {
     console.log(e);
