@@ -4,8 +4,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 function setCardColour(result) {
   const card = document.getElementById('card');
-  if(result.main.temp > 25) { card.style.background = "linear-gradient(red, orange)"; }
-  if(result.main.temp > 15 && result.main.temp < 25) { card.style.background = "linear-gradient(orange, yellow)"; }
+  const temp = parseInt(result.main.temp);
+
+  if(temp > 25) { card.style.background = "linear-gradient(red, orange)"; }
+  else if(temp > 15 && temp < 25) { card.style.background = "linear-gradient(orange, yellow)"; }
   else { card.style.background = "linear-gradient(yellow, blue)"; }
 }
 
