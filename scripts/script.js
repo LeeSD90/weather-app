@@ -2,10 +2,24 @@ document.addEventListener("DOMContentLoaded", function(e) {
   document.getElementById("get-weather").addEventListener("click", updateWeatherDisplay);
 });
 
+function setCardColour(result) {
+  const card = document.getElementById('card');
+  if(result.main.temp > 25) { card.style.background = "linear-gradient(red, orange)"; }
+  if(result.main.temp > 15 && result.main.temp < 25) { card.style.background = "linear-gradient(orange, yellow)"; }
+  else { card.style.background = "linear-gradient(yellow, blue)"; }
+}
+
 function updateWeatherDisplay() {
   const data = fetchWeather(document.getElementById("location").value);
   data.then(r => {
-    document.getElementById("result").innerHTML = "Temperature: " + r.main.temp + " &deg;C";
+    console.log(r);
+    setCardColour(r);
+    document.getElementById("result").innerHTML = 
+    `
+    <div>Temperature: ${r.main.temp}&deg;C</div>
+    <div>Humidity: ${r.main.humidity}%</div>
+    <div>Wind Speed: ${r.wind.speed} m/s</div>
+    `;
   });
 }
 
@@ -23,4 +37,3 @@ async function fetchWeather(location) {
 }
 
 const APPID = "e25872c6e80b8a83e7ba15ec135fcbfc";
-
