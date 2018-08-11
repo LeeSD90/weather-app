@@ -8,7 +8,7 @@ function setCardColour(result) {
 
   if(temp > 25) { card.style.background = "linear-gradient(red, orange)"; }
   else if(temp > 15 && temp < 25) { card.style.background = "linear-gradient(orange, yellow)"; }
-  else { card.style.background = "linear-gradient(yellow, blue)"; }
+  else { card.style.background = "linear-gradient(#32E58E, #32B7E5)"; }
 }
 
 function updateWeatherDisplay() {
